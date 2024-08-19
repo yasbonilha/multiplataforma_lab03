@@ -13,8 +13,16 @@ int pegarOpcaoUsuario(){ //uma função que pega o que o usuário digitou (e uti
   return int.parse(stdin.readLineSync()!);
 }
 
+int pegarRodadas(){
+  return int.parse(stdin.readLineSync()!);
+}
+
 bool opcaoValida(int opcao){ //validação do que o usuário digitou
-  return opcao >=1 && opcao <=4;
+  return opcao >=1 && opcao <4;
+}
+
+bool rodadaValida(int rodada) {
+  return rodada >=1 && rodada <=5;
 }
 
 OPCOES mapearOpcao( int opcao) {
@@ -47,29 +55,32 @@ String verificaResultado(OPCOES opUsuario, OPCOES opComputador){
 
 void jogo() {
 int opUsuario;
+int rodadas = pegarRodadas();
 do{
-  do{
-    var menu = "1 - pedra \n2 - papel \n3 - tesoura \n4 - sair";
-    exibir(menu);
+  while()
+    do{
+      var menu = "1 - pedra \n2 - papel \n3 - tesoura \n4 - sair";
+      exibir(menu);
 
-    opUsuario = pegarOpcaoUsuario();
+      opUsuario = pegarOpcaoUsuario();
 
-  }while(!opcaoValida(opUsuario));
+    }while(!opcaoValida(opUsuario));
 
-  if(opUsuario == 4) {
-    exibir("até logo");
-  }
-  else{
-    var opComputador = Random().nextInt(3) + 1; //aqui, apesar de já termos declarado a variável, o compilador nao sabe o valor que dará (porque é random), entao nao dá para ser constante
-    OPCOES opcaoUsuario = mapearOpcao(opUsuario);
-    final opcaoComputador = mapearOpcao(opComputador);
+    if(opUsuario == 4) {
+      exibir("até logo");
+    }
+    else{
+      var opComputador = Random().nextInt(3) + 1; //aqui, apesar de já termos declarado a variável, o compilador nao sabe o valor que dará (porque é random), entao nao dá para ser constante
+      OPCOES opcaoUsuario = mapearOpcao(opUsuario);
+      final opcaoComputador = mapearOpcao(opComputador);
 
-    exibir('JOGADOR(${opcaoUsuario.name }) vs (${opcaoComputador.name})COMPUTADOR');
-    final resultado = verificaResultado(opcaoUsuario, opcaoComputador);
-    exibir(resultado);
+      exibir('JOGADOR(${opcaoUsuario.name }) vs (${opcaoComputador.name})COMPUTADOR');
+      final resultado = verificaResultado(opcaoUsuario, opcaoComputador);
+      exibir(resultado);
 
-  }
+    }
 
-}while(opUsuario != 4);
+}
+while(rodadaValida(rodadas));
 
 } //essa função está sendo executada lá na função principal (main), que está na pasta bin
